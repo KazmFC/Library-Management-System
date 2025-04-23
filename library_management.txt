@@ -1,0 +1,79 @@
+-- Create database
+CREATE DATABASE IF NOT EXISTS library_management;
+USE library_management;
+
+-- Create authors table
+CREATE TABLE authors (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    country VARCHAR(255) NOT NULL
+);
+
+-- Create books table
+CREATE TABLE books (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    count INT NOT NULL,
+    papers INT NOT NULL,
+    author VARCHAR(255) NOT NULL
+);
+
+-- Create users table
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL
+);
+
+-- Create students table
+CREATE TABLE students (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL
+);
+
+-- Create author_books table
+CREATE TABLE author_books (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    author_id INT NOT NULL,
+    book_id INT NOT NULL,
+    FOREIGN KEY (author_id) REFERENCES authors(id),
+    FOREIGN KEY (book_id) REFERENCES books(id)
+);
+
+-- Create student_books table
+CREATE TABLE student_books (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    student_id INT NOT NULL,
+    book_id INT NOT NULL,
+    FOREIGN KEY (student_id) REFERENCES students(id),
+    FOREIGN KEY (book_id) REFERENCES books(id)
+);
+
+-- Insert sample data
+INSERT INTO authors (name, country) VALUES
+('J.K. Rowling', 'United Kingdom'),
+('George Orwell', 'United Kingdom'),
+('Jane Austen', 'United Kingdom');
+
+INSERT INTO books (name, count, papers, author) VALUES
+('Harry Potter', 10, 400, 'J.K. Rowling'),
+('1984', 5, 300, 'George Orwell'),
+('Pride and Prejudice', 8, 350, 'Jane Austen');
+
+INSERT INTO users (name, email) VALUES
+('John Doe', 'john.doe@example.com'),
+('Jane Smith', 'jane.smith@example.com');
+
+INSERT INTO students (name, email) VALUES
+('Alice Johnson', 'alice.johnson@example.com'),
+('Bob Williams', 'bob.williams@example.com');
+
+INSERT INTO author_books (author_id, book_id) VALUES
+(1, 1),
+(2, 2),
+(3, 3);
+
+INSERT INTO student_books (student_id, book_id) VALUES
+(1, 1),
+(2, 2);
